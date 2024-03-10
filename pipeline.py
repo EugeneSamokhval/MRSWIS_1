@@ -25,6 +25,9 @@ def pipeline(vector_1, vector_2):
                 pipe_data_collector.append([tic_counter, 'sum', temp_result[len(
                     temp_result)-2], vector_1[index], temp_result[len(temp_result)-1]])
                 tic_counter += 1
+            else:
+                [tic_counter, 'sum', temp_result[len(
+                    temp_result)-1], mo.create_array(consts.NUMSIZE), temp_result[len(temp_result)-1]]
             temp_result.append(mo.shear_right(
                 temp_result[len(temp_result)-1], 1))
             pipe_data_collector.append(
@@ -40,16 +43,28 @@ def pipeline(vector_1, vector_2):
 
 
 def pipeview(content: list, tic_couter):
-    for tic in range(1, tic_couter):
-        print("Такт ", tic)
-        for entry in content:
-            if entry[0] == tic:
-                if entry[1] == 'sum':
-                    print('Суммирование чисел: ',
-                          entry[2], '+', entry[3], '=', entry[4])
-                elif entry[1] == 'shearr':
-                    print('Сдвиг вправо: ', entry[2],
-                          'на', entry[3], '=', entry[4])
-                elif entry[1] == 'shearl':
-                    print('Сдвиг влево: ', entry[2],
-                          'на', entry[3], '=', entry[4])
+    sums = []
+    shears = []
+    for entry in content:
+        if entry[1] == 'sum':
+            sums.append(entry)
+        elif entry[1] == 'shearr':
+            shears.append(entry)
+        elif entry[1] == 'shearl':
+            shears.append(entry)
+    for index in range(len(shears)):
+        stage = 1
+        print("\nТакт ", index)
+        if index < len(sums):
+            print('Этап ', stage)
+            print('Суммирование чисел: ',
+                  sums[index][2], '+', sums[index][3], '=', sums[index][4])
+            stage += 1
+        if shears[index][1] == 'shearl':
+            print('Этап ', stage)
+            print('Сдвиг влево: ', shears[index][2],
+                  'на', shears[index][3], '=', shears[index][4])
+        else:
+            print('Этап ', stage)
+            print('Сдвиг вправо: ', shears[index][2],
+                  'на', shears[index][3], '=', shears[index][4])
