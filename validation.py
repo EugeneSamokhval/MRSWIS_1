@@ -37,6 +37,6 @@ def valdate_input(input1: str, input2: str) -> bool:
     input2 = [int(digit) for digit in input2]
     if not (check_on_overflow(input1) and check_on_overflow(input2)):
         return None, None
-    print('\n', ('(' + str(input1).strip('[').strip(']')+')'))
+    print(('(' + str(input1).strip('[').strip(']')+')'))
     print(('(' + str(input2).strip('[').strip(']')+')'), '\n')
     return input1, input2
