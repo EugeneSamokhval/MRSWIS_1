@@ -65,17 +65,17 @@ def pipeview(content: list, vectors_len):
             if not entry:
                 print('Ожидает очереди')
             elif entry[1] == 'sum':
-                stage = subindex + entry[-1]
+                stage = subindex - entry[-1]
                 print('Этап ', stage)
                 print('Суммирование чисел: ',
                       entry[2], '+', entry[3], '=', entry[4])
             elif entry[1] == 'shearl':
-                stage = subindex + entry[-1]
+                stage = subindex - entry[-1]
                 print('Этап ', stage)
                 print('Сдвиг влево: ', entry[2],
                       'на', entry[3], '=', entry[4])
             elif entry[1] == 'shearr':
-                stage = subindex + entry[-1]
+                stage = subindex - entry[-1]
                 print('Этап ', stage)
                 print('Сдвиг вправо: ', entry[2],
                       'на', entry[3], '=', entry[4])

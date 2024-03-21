@@ -26,6 +26,8 @@ def check_on_overflow(input: list):
 def valdate_input(input1: str, input2: str) -> bool:
     input1 = input1.replace(' ', '')
     input2 = input2.replace(' ', '')
+    if len(input1) == 0 or len(input2) == 0:
+        return None, None
     if not (check_on_unknown(input1) and check_on_unknown(input2)):
         return None, None
     input1 = input1.split(',')
