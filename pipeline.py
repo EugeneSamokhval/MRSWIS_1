@@ -34,10 +34,9 @@ def pipeline(vector_1, vector_2):
             pipe_data_collector.append(
                 [tic_counter, 'shearr', temp_result[len(temp_result)-2], 1, temp_result[len(temp_result)-1], index])
             tic_counter += 1
-        temp_result.append(mo.shear_left(temp_result[len(temp_result)-1], 1))
-        pipe_data_collector.append([tic_counter, 'shearl', temp_result[len(
-            temp_result)-2], 1, temp_result[len(temp_result)-1], index])
+        temp_result.pop(-1)
         result.append(temp_result)
+        pipe_data_collector.pop(-1)
     pipe_data_collector.sort(key=lambda x: x[0])
     pipeview(pipe_data_collector, len(vector_1))
     return result
