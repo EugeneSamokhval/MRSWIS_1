@@ -8,9 +8,13 @@
 import validation
 import machineoperations as mo
 from pipeline import pipeline
+import logging
 
 
 def main():
+    logger = logging.getLogger(__name__)
+    logging.basicConfig(filename='log.log', level=logging.INFO)
+    logging.info('Pipeline app started')
     print('Конвеер')
     while (1):
         user_inpt1 = input(
@@ -23,12 +27,14 @@ def main():
             continue
         valid_user_inpt1 = [mo.dec_to_bin(dec) for dec in valid_user_inpt1]
         valid_user_inpt2 = [mo.dec_to_bin(dec) for dec in valid_user_inpt2]
-        result = pipeline(valid_user_inpt1, valid_user_inpt2)
+        result = pipeline(valid_user_inpt1, valid_user_inpt2, logger)
         index = 0
         for iteration in result:
             print(index, 'Результат:', mo.bin_to_dec(
                 iteration[len(iteration)-1]), '   ', iteration[len(iteration)-1])
             index += 1
+            logger.info(index + ' ' + 'Результат:' + ' ' + mo.bin_to_dec(
+                iteration[len(iteration)-1]) + ' ' + '   ' + ' ' + iteration[len(iteration)-1])
         if input('Продожить y/n ?') == 'n':
             break
 
